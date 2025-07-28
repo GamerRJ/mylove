@@ -2,138 +2,300 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Funny Button Interaction</title>
+  <title>Pink Button Interaction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 20px;
     }
 
     #wrapper {
       text-align: center;
+      max-width: 1000px;
+      width: 100%;
+      position: relative;
+    }
+
+    .header {
+      position: relative;
+      margin-bottom: 40px;
     }
 
     h1 {
-      font-size: 2.5em;
-      color: #333;
-      margin-bottom: 40px;
+      font-size: 3.5rem;
+      color: #fff;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(to right, #ffffff, #f8f9fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     #container {
       position: relative;
-      width: 1000px;
+      width: 100%;
       height: 600px;
-      background-color: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .heart-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(255,255,255,0.15)"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+      background-repeat: repeat;
+      background-size: 80px;
+      z-index: 0;
     }
 
     button {
-      padding: 15px 30px;
-      font-size: 18px;
+      padding: 18px 45px;
+      font-size: 1.4rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 50px;
       cursor: pointer;
       position: absolute;
-      transition: left 0.25s ease, top 0.25s ease;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      z-index: 2;
+      outline: none;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(0);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     #yesBtn {
       left: 40%;
       top: 500px;
-      background-color: #4CAF50;
+      background: linear-gradient(45deg, #4cd137, #44bd32);
       color: white;
-      box-shadow: 0 5px 15px rgba(0, 128, 0, 0.3);
+      box-shadow: 0 5px 20px rgba(76, 209, 55, 0.4);
     }
 
     #yesBtn:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
+      background: linear-gradient(45deg, #44bd32, #3caa2c);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(76, 209, 55, 0.6);
+    }
+
+    #yesBtn:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 15px rgba(76, 209, 55, 0.4);
     }
 
     #noBtn {
-      background-color: #f44336;
+      background: linear-gradient(45deg, #e84393, #fd79a8);
       color: white;
-      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+      box-shadow: 0 5px 20px rgba(232, 67, 147, 0.4);
     }
 
     #noBtn:hover {
-      background-color: #e53935;
+      background: linear-gradient(45deg, #d63031, #e84393);
+    }
+
+    .distance-indicator {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(5px);
+      padding: 12px 20px;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .distance-indicator span {
+      font-weight: 700;
+      color: #ffeb3b;
+      text-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+    }
+
+    .proximity-circle {
+      position: absolute;
+      pointer-events: none;
+      border: 2px dashed rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 1;
+    }
+
+    .proximity-circle.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      #container {
+        height: 500px;
+      }
+      
+      button {
+        padding: 15px 35px;
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div id="wrapper">
-    <h1>Do you love this idea?</h1>
-    <div id="container">
-      <button id="yesBtn">Yes</button>
-      <button id="noBtn">No</button>
-    </div>
+<div id="wrapper">
+  <div class="header">
+    <h1>Do you love me?</h1>
+    <p class="subtitle">Please be Honest</p>
   </div>
+  
+  <div id="container">
+    <div class="heart-bg"></div>
+    <div class="proximity-circle" id="proximityCircle"></div>
+    <div class="distance-indicator">
+      <i class="fas fa-ruler"></i>
+      Distance: <span id="distanceValue">0</span>px
+    </div>
+    <button id="yesBtn">
+      <i class="fas fa-heart"></i> Yes
+    </button>
+    <button id="noBtn">
+      <i class="fas fa-times"></i> No
+    </button>
+  </div>
+  
+  <p class="footer">HURRAY!!!!!!</p>
+</div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const container = document.getElementById("container");
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const container = document.getElementById("container");
+  const proximityCircle = document.getElementById("proximityCircle");
+  const distanceValue = document.getElementById("distanceValue");
 
-    yesBtn.addEventListener("click", () => {
+  // Initialize button position
+  let noBtnX = 500;
+  let noBtnY = 250;
+  noBtn.style.left = noBtnX + "px";
+  noBtn.style.top = noBtnY + "px";
+
+  // Rickroll on Yes
+  yesBtn.addEventListener("click", () => {
+    // Create a temporary animation effect
+    yesBtn.style.transform = "scale(1.1)";
+    setTimeout(() => {
       window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-    });
+    }, 300);
+  });
 
-    // Initialize button position
-    let noBtnX = 500;
-    let noBtnY = 250;
-    noBtn.style.left = noBtnX + "px";
-    noBtn.style.top = noBtnY + "px";
+  container.addEventListener("mousemove", (e) => {
+    const containerRect = container.getBoundingClientRect();
+    const mouseX = e.clientX - containerRect.left;
+    const mouseY = e.clientY - containerRect.top;
 
-    container.addEventListener("mousemove", (e) => {
-      const containerRect = container.getBoundingClientRect();
-      const mouseX = e.clientX - containerRect.left;
-      const mouseY = e.clientY - containerRect.top;
+    const btnCenterX = noBtn.offsetLeft + noBtn.offsetWidth / 2;
+    const btnCenterY = noBtn.offsetTop + noBtn.offsetHeight / 2;
 
-      const btnCenterX = noBtn.offsetLeft + noBtn.offsetWidth / 2;
-      const btnCenterY = noBtn.offsetTop + noBtn.offsetHeight / 2;
+    const distance = Math.hypot(mouseX - btnCenterX, mouseY - btnCenterY);
+    
+    // Update distance display
+    distanceValue.textContent = Math.round(distance);
+    
+    // Update proximity circle
+    proximityCircle.style.left = (btnCenterX - 150) + "px";
+    proximityCircle.style.top = (btnCenterY - 150) + "px";
+    proximityCircle.style.width = "300px";
+    proximityCircle.style.height = "300px";
+    
+    if (distance < 150) {
+      proximityCircle.classList.add('active');
+    } else {
+      proximityCircle.classList.remove('active');
+    }
 
-      const distance = Math.hypot(mouseX - btnCenterX, mouseY - btnCenterY);
+    // Exact movement logic from your code
+    if (distance < 150) {
+      // Direction away from cursor
+      let dx = btnCenterX - mouseX;
+      let dy = btnCenterY - mouseY;
 
-      if (distance < 150) {
-        // Direction away from cursor
-        let dx = btnCenterX - mouseX;
-        let dy = btnCenterY - mouseY;
+      const length = Math.max(Math.hypot(dx, dy), 1);
+      dx = dx / length;
+      dy = dy / length;
 
-        const length = Math.max(Math.hypot(dx, dy), 1);
-        dx = dx / length;
-        dy = dy / length;
+      // Move distance - exactly 120px as in your original code
+      let moveAmount = 120;
+      noBtnX += dx * moveAmount + (Math.random() - 0.5) * 50;
+      noBtnY += dy * moveAmount + (Math.random() - 0.5) * 50;
 
-        // Move distance
-        let moveAmount = 120;
-        noBtnX += dx * moveAmount + (Math.random() - 0.5) * 50;
-        noBtnY += dy * moveAmount + (Math.random() - 0.5) * 50;
+      // Edge margin to keep button from sticking to walls
+      const margin = 20;
+      const maxX = container.clientWidth - noBtn.offsetWidth - margin;
+      const maxY = container.clientHeight - noBtn.offsetHeight - margin;
 
-        // Edge margin to keep button from sticking to walls
-        const margin = 20;
-        const maxX = container.clientWidth - noBtn.offsetWidth - margin;
-        const maxY = container.clientHeight - noBtn.offsetHeight - margin;
+      noBtnX = Math.max(margin, Math.min(noBtnX, maxX));
+      noBtnY = Math.max(margin, Math.min(noBtnY, maxY));
 
-        noBtnX = Math.max(margin, Math.min(noBtnX, maxX));
-        noBtnY = Math.max(margin, Math.min(noBtnY, maxY));
-
-        noBtn.style.left = `${noBtnX}px`;
-        noBtn.style.top = `${noBtnY}px`;
-      }
-    });
-  </script>
+      noBtn.style.left = `${noBtnX}px`;
+      noBtn.style.top = `${noBtnY}px`;
+    }
+  });
+</script>
 
 </body>
 </html>
-
-
 
